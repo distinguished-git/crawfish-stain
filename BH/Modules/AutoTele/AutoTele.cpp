@@ -15,11 +15,6 @@ using namespace Drawing;
 void AutoTele::OnLoad() {
 	LoadConfig();
 
-	BH::config->ReadKey("Next Tele", "VK_NUMPAD4", NextKey);
-	BH::config->ReadKey("Other Tele", "VK_NUMPAD8", OtherKey);
-	BH::config->ReadKey("Waypoint Tele", "VK_NUMPAD9", WPKey);
-	BH::config->ReadKey("Prev Tele", "VK_NUMPAD7", PrevKey);
-
 	settingsTab = new UITab("Miscellaneous", BH::settingsUI);
 
 	new Texthook(settingsTab, 60, 12, "Toggles");
@@ -54,10 +49,11 @@ void AutoTele::LoadConfig() {
 	BH::config->ReadToggle("Fast Teleport", "None", true, Toggles["Fast Teleport"]);
 	BH::config->ReadToggle("Quest Drop Warning", "None", false, Toggles["Quest Drop Warning"]);
 
-	BH::config->ReadKey("Next Tele", "VK_NUMPAD4", NextKey);
-	BH::config->ReadKey("Other Tele", "VK_NUMPAD8", OtherKey);
-	BH::config->ReadKey("Waypoint Tele", "VK_NUMPAD9", WPKey);
-	BH::config->ReadKey("Prev Tele", "VK_NUMPAD7", PrevKey);
+	BH::config->ReadKey("Next Tele", "VK_H", NextKey);
+	BH::config->ReadKey("Other Tele", "VK_J", OtherKey);
+	BH::config->ReadKey("Waypoint Tele", "VK_K", WPKey);
+	BH::config->ReadKey("Prev Tele", "VK_L", PrevKey);
+
 	BH::config->ReadInt("Path Color", Colors[0]);
 	BH::config->ReadInt("Next Color", Colors[1]);
 	BH::config->ReadInt("Other Color", Colors[2]);
