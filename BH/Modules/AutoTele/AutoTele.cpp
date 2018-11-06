@@ -201,15 +201,15 @@ void AutoTele::OnKey(bool up, BYTE key, LPARAM lParam, bool* block) {
 	GetVectors();
 	if (key == NextKey) 
 	{
-		ManageTele(vVector[GetPlayerArea()*4+1]);
+		ManageTele(vVector[GetPlayerArea()*4+0]);
 	}
 	else if (key == OtherKey) 
 	{
-		ManageTele(vVector[GetPlayerArea()*4+2]);
+		ManageTele(vVector[GetPlayerArea()*4+1]);
 	} 
 	else if (key == WPKey) 
 	{
-		ManageTele(vVector[GetPlayerArea()*4+0]);
+		ManageTele(vVector[GetPlayerArea()*4+2]);
 	}
 	else if (key == PrevKey) 
 	{
