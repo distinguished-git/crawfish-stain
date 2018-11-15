@@ -42,12 +42,12 @@ void AutoTele::OnLoad() {
 }
 
 void AutoTele::LoadConfig() {
-	BH::config->ReadToggle("CP to cave", "None", false, Toggles["CP to cave"]);
+	BH::config->ReadToggle("CP to cave", "None", true, Toggles["CP to cave"]);
 	BH::config->ReadToggle("Display Messages", "None", true, Toggles["Display Messages"]);
 	BH::config->ReadToggle("Draw Path", "None", true, Toggles["Draw Path"]);
 	BH::config->ReadToggle("Draw Destination", "None", true, Toggles["Draw Destination"]);
 	BH::config->ReadToggle("Fast Teleport", "None", true, Toggles["Fast Teleport"]);
-	BH::config->ReadToggle("Quest Drop Warning", "None", false, Toggles["Quest Drop Warning"]);
+	BH::config->ReadToggle("Quest Drop Warning", "None", true, Toggles["Quest Drop Warning"]);
 
 	BH::config->ReadKey("Next Tele", "VK_J", NextKey);
 	BH::config->ReadKey("Other Tele", "VK_K", OtherKey);

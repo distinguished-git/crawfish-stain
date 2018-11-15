@@ -165,7 +165,7 @@ void UI::SetMinimized(bool newState) {
 	Lock();  
 	if (newState) {
 		Minimized.push_back(this);
-		BH::config->Write();
+//		BH::config->Write();
 	} else
 		Minimized.remove(this); 
 	minimized = newState; 
