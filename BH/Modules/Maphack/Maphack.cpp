@@ -47,6 +47,7 @@ void Maphack::LoadConfig() {
 void Maphack::ReadConfig() {
 	BH::config->ReadInt("Reveal Mode", revealType);
 	BH::config->ReadInt("Show Monster Resistance", monsterResistanceThreshold);
+	BH::config->ReadInt("LK Chest Lines", lkLinesColor);
 
 	BH::config->ReadKey("Reload Config", "VK_NUMPAD0", reloadConfig);
 
@@ -115,6 +116,7 @@ void Maphack::ReadConfig() {
 	BH::config->ReadToggle("Remove Shake", "None", false, Toggles["Remove Shake"]);
 	BH::config->ReadToggle("Display Level Names", "None", true, Toggles["Display Level Names"]);
 	BH::config->ReadToggle("Monster Resistances", "None", true, Toggles["Monster Resistances"]);
+	BH::config->ReadToggle("Monster Enchantments", "None", true, Toggles["Monster Enchantments"]);
 
 	BH::config->ReadInt("Minimap Max Ghost", automapDraw.maxGhost);
 }
@@ -173,6 +175,12 @@ void Maphack::OnLoad() {
 	new Checkhook(settingsTab, 4, (Y += 15), &Toggles["Show Monsters"].state, "Show Monsters");
 	new Keyhook(settingsTab, 130, (Y + 2), &Toggles["Show Monsters"].toggle, "");
 
+	new Checkhook(settingsTab, 4, (Y += 15), &Toggles["Monster Enchantments"].state, "  Enchantments");
+	new Keyhook(settingsTab, 130, (Y + 2), &Toggles["Monster Enchantments"].toggle, "");
+
+	new Checkhook(settingsTab, 4, (Y += 15), &Toggles["Monster Resistances"].state, "  Resistances");
+	new Keyhook(settingsTab, 130, (Y + 2), &Toggles["Monster Resistances"].toggle, "");
+	
 	new Checkhook(settingsTab, 4, (Y += 15), &Toggles["Show Missiles"].state, "Show Missiles");
 	new Keyhook(settingsTab, 130, (Y + 2), &Toggles["Show Missiles"].toggle, "");
 
@@ -191,9 +199,6 @@ void Maphack::OnLoad() {
 	new Checkhook(settingsTab, 4, (Y += 15), &Toggles["Remove Shake"].state, "Remove Shake");
 	new Keyhook(settingsTab, 130, (Y + 2), &Toggles["Remove Shake"].toggle, "");
 
-	new Checkhook(settingsTab, 4, (Y += 15), &Toggles["Monster Resistances"].state, "Monster Resistances");
-	new Keyhook(settingsTab, 130, (Y + 2), &Toggles["Monster Resistances"].toggle, "");
-
 	new Checkhook(settingsTab, 4, (Y += 15), &Toggles["Display Level Names"].state, "Level Names");
 	new Keyhook(settingsTab, 130, (Y + 2), &Toggles["Display Level Names"].toggle, "");
 
@@ -211,7 +216,7 @@ void Maphack::OnLoad() {
 	new Colorhook(settingsTab, 210, 122, &monsterColors["Champion"], "Champion");
 	new Colorhook(settingsTab, 210, 137, &monsterColors["Boss"], "Boss");
 
-	new Texthook(settingsTab, 3, (Y += 15), "Reveal Type:");
+	new Texthook(settingsTab, 6, (Y += 15), "Reveal Type:");
 
 	vector<string> options;
 	options.push_back("Game");
@@ -370,14 +375,33 @@ void Maphack::OnAutomapDraw() {
 							immunityText += szResistances[n];
 						}
 					}
+					
+					//Determine Enchantments
+					string enchantText;
+					if (unit->pMonsterData->fBoss && Toggles["Monster Enchantments"].state) {
+						string szEnchantments[] = {"ÿc3m", "ÿc1e", "ÿc9e", "ÿc3e"};
+						
+						for (int n = 0; n < 9; n++) {
+							if (unit->pMonsterData->anEnchants[n] == ENCH_MANA_BURN)
+								enchantText += szEnchantments[0];
+							if (unit->pMonsterData->anEnchants[n] == ENCH_FIRE_ENCHANTED)
+								enchantText += szEnchantments[1];
+							if (unit->pMonsterData->anEnchants[n] == ENCH_LIGHTNING_ENCHANTED)
+								enchantText += szEnchantments[2];
+							if (unit->pMonsterData->anEnchants[n] == ENCH_COLD_ENCHANTED)
+								enchantText += szEnchantments[3];
+						}
+					}
 
 					xPos = unit->pPath->xPos;
 					yPos = unit->pPath->yPos;
-					automapBuffer.push([immunityText, color, xPos, yPos, lineColor, MyPos]()->void{
+					automapBuffer.push([immunityText, enchantText, color, xPos, yPos, lineColor, MyPos]()->void{
 						POINT automapLoc;
 						Drawing::Hook::ScreenToAutomap(&automapLoc, xPos, yPos);
 						if (immunityText.length() > 0)
 							Drawing::Texthook::Draw(automapLoc.x, automapLoc.y - 8, Drawing::Center, 6, White, immunityText);
+						if (enchantText.length() > 0)
+							Drawing::Texthook::Draw(automapLoc.x, automapLoc.y - 14, Drawing::Center, 6, White, enchantText);
 						Drawing::Crosshook::Draw(automapLoc.x, automapLoc.y, color);
 						if (lineColor != -1) {
 							Drawing::Linehook::Draw(MyPos.x, MyPos.y, automapLoc.x, automapLoc.y, lineColor);
@@ -462,10 +486,26 @@ void Maphack::OnAutomapDraw() {
 						Drawing::Hook::ScreenToAutomap(&automapLoc, xPos, yPos);
 						Drawing::Boxhook::Draw(automapLoc.x - 1, automapLoc.y - 1, 2, 2, 255, Drawing::BTHighlight);
 					});
+				}				
+			}
+		}
+		if (lkLinesColor > 0 && player->pPath->pRoom1->pRoom2->pLevel->dwLevelNo == MAP_A3_LOWER_KURAST) {
+			for(Room2 *pRoom =  player->pPath->pRoom1->pRoom2->pLevel->pRoom2First; pRoom; pRoom = pRoom->pRoom2Next) {
+				for (PresetUnit* preset = pRoom->pPreset; preset; preset = preset->pPresetNext) {
+					DWORD xPos, yPos;
+					int lkLineColor = lkLinesColor;
+					if (preset->dwTxtFileNo == 160) {
+						xPos = (preset->dwPosX) + (pRoom->dwPosX * 5);
+						yPos = (preset->dwPosY) + (pRoom->dwPosY * 5);
+						automapBuffer.push([xPos, yPos, MyPos, lkLineColor]()->void{
+							POINT automapLoc;
+							Drawing::Hook::ScreenToAutomap(&automapLoc, xPos, yPos);
+							Drawing::Linehook::Draw(MyPos.x, MyPos.y, automapLoc.x, automapLoc.y, lkLineColor);
+						});
+					}
 				}
 			}
 		}
-
 		if (!Toggles["Display Level Names"].state)
 			return;
 		for (list<LevelList*>::iterator it = automapLevels.begin(); it != automapLevels.end(); it++) {
@@ -688,7 +728,7 @@ void Maphack::RevealRoom(Room2* room) {
 		int cellNo = -1;
 		
 		// Special NPC Check
-		if (preset->dwType == 1)
+		if (preset->dwType == UNIT_MONSTER)
 		{
 			// Izual Check
 			if (preset->dwTxtFileNo == 256)
@@ -697,9 +737,9 @@ void Maphack::RevealRoom(Room2* room) {
 			if (preset->dwTxtFileNo == 745)
 				cellNo = 745;
 		// Special Object Check
-		} else if (preset->dwType == 2) {
+		} else if (preset->dwType == UNIT_OBJECT) {
 			// Uber Chest in Lower Kurast Check
-			if (preset->dwTxtFileNo == 580 && room->pLevel->dwLevelNo == 79)		
+			if (preset->dwTxtFileNo == 580 && room->pLevel->dwLevelNo == MAP_A3_LOWER_KURAST)
 				cellNo = 318;
 
 			// Countess Chest Check
@@ -724,7 +764,7 @@ void Maphack::RevealRoom(Room2* room) {
 				if (obj)
 					cellNo = obj->nAutoMap;//Set the cell number then.
 			}
-		} else if (preset->dwType == 5) {
+		} else if (preset->dwType == UNIT_TILE) {
 			LevelList* level = new LevelList;
 			for (RoomTile* tile = room->pRoomTiles; tile; tile = tile->pNext) {
 				if (*(tile->nNum) == preset->dwTxtFileNo) {

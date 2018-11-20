@@ -1,6 +1,6 @@
 #pragma once
 
-#define BH_VERSION "BH 1.9.0"
+#define BH_VERSION "BH 1.9.1"
 
 enum TextColor {
 	Disabled=-1,
@@ -492,6 +492,22 @@ enum TextColor {
 #define STAT_QUESTITEMDIFFICULTY	356
 #define STAT_PASSIVEMAGICDMGMASTERY	357
 #define STAT_PASSIVEMAGICRESREDUC	358
+
+///////////////////////////////////////////////////
+// Unit Enchantments
+///////////////////////////////////////////////////
+#define ENCH_EXTRA_STRONG			5
+#define ENCH_EXTRA_FAST				6
+#define ENCH_CURSED					7
+#define ENCH_MAGIC_RESISTANT		8
+#define ENCH_FIRE_ENCHANTED			9
+#define ENCH_LIGHTNING_ENCHANTED	17
+#define ENCH_COLD_ENCHANTED			18
+#define ENCH_MANA_BURN				25
+#define ENCH_TELEPORTATION			26
+#define ENCH_SPECTRAL_HIT			27
+#define ENCH_STONE_SKIN				28
+#define ENCH_MULTIPLE_SHOTS			29
 
 ///////////////////////////////////////////////////
 // Skill Tab Definitions
@@ -1065,3 +1081,7 @@ enum QuestFlags {
 #define MONSTAT_ALIGN_ENEMY				0x0
 #define MONSTAT_ALIGN_ALLY				0x1
 #define MONSTAT_ALIGN_NEUTRAL			0x2
+
+// Toggles for GOODSK and GOODCLSK in ItemDisplay
+#define CLASS_SKILLS					0
+#define CLASS_TAB_SKILLS				1
