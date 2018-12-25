@@ -86,7 +86,7 @@ bool ModuleManager::UserInput(wchar_t* module, wchar_t* msg, bool fromGame) {
 	}
 
 	if (name.compare("save") == 0) {
-//		BH::config->Write();
+		BH::config->Write();
 		Print("ÿc4BH:ÿc0 Successfully saved configuration.");
 	}
 

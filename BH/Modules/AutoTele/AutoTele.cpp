@@ -42,7 +42,7 @@ void AutoTele::OnLoad() {
 }
 
 void AutoTele::LoadConfig() {
-	BH::config->ReadToggle("CP to cave", "None", true, Toggles["CP to cave"]);
+	BH::config->ReadToggle("CP to cave", "None", false, Toggles["CP to cave"]);
 	BH::config->ReadToggle("Display Messages", "None", true, Toggles["Display Messages"]);
 	BH::config->ReadToggle("Draw Path", "None", true, Toggles["Draw Path"]);
 	BH::config->ReadToggle("Draw Destination", "None", true, Toggles["Draw Destination"]);

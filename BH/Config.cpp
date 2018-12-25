@@ -57,6 +57,8 @@ bool Config::Parse() {
 }
 
 bool Config::Write() {
+	return false;
+	
 	//If this is a config with a pre-set of values, can't parse!
 	if (configName.length() == 0)
 		return false;
