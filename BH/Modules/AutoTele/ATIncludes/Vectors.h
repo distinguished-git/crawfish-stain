@@ -392,7 +392,7 @@ Vector vVector[] = {
 	{0}, {0}, {0}, {0},										//0x4b -> kurast docks
 
 
-	{EXIT_MULTI, MAP_A3_GREAT_MARSH, MAP_A3_FLAYER_JUNGLE},								//0x4c
+	{EXIT, MAP_A3_GREAT_MARSH},								//0x4c
 	{EXIT, MAP_A3_SPIDER_CAVERN},
 	{UNIT_OBJECT, 237},
 	{EXIT, MAP_A3_KURAST_DOCKS},
@@ -407,11 +407,11 @@ Vector vVector[] = {
 	{EXIT, MAP_A3_LOWER_KURAST},							//0x4e
 	{UNIT_OBJECT, 252},
 	{UNIT_OBJECT, 237},
-	{EXIT_MULTI, MAP_A3_GREAT_MARSH, MAP_A3_SPIDER_FOREST},
+	{EXIT, MAP_A3_GREAT_MARSH},
 
 
 	{EXIT, MAP_A3_KURAST_BAZAAR},							//0x4f
-  {0},
+  	{580},
 	{UNIT_OBJECT, 237},
 	{EXIT, MAP_A3_FLAYER_JUNGLE},
 
@@ -524,19 +524,19 @@ Vector vVector[] = {
 
 
 	{EXIT, MAP_A4_PLAINS_OF_DESPAIR},						//0x68
-  {0},
+	{UNIT_MONSTER, 256},									//izual
 	{0},
 	{EXIT, MAP_A4_THE_PANDEMONIUM_FORTRESS},
 
 
 	{EXIT, MAP_A4_CITY_OF_THE_DAMNED},						//0x69
 	{UNIT_MONSTER, 256},									//izual
-	{UNIT_OBJECT, 238},
+	{0},
 	{EXIT, MAP_A4_OUTER_STEPPES},
 
 
 	{EXIT, MAP_A4_RIVER_OF_FLAME},							//0x6a
-  {0},
+	{UNIT_MONSTER, 256},									//izual
 	{UNIT_OBJECT, 238},
 	{EXIT, MAP_A4_PLAINS_OF_DESPAIR},
 
