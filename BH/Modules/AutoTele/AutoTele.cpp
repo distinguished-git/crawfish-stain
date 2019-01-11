@@ -209,11 +209,13 @@ void AutoTele::OnKey(bool up, BYTE key, LPARAM lParam, bool* block) {
 	} 
 	else if (key == WPKey) 
 	{
-		ManageTele(vVector[GetPlayerArea()*4+2]);
+		RunTo(FindPresetLocation(UNIT_OBJECT, 237, Areas[0]));
+//		ManageTele(vVector[GetPlayerArea()*4+2]);
 	}
 	else if (key == PrevKey) 
 	{
-		ManageTele(vVector[GetPlayerArea()*4+3]);
+		RunTo(FindPresetLocation(UNIT_OBJECT, 237, Areas[1]));
+//		ManageTele(vVector[GetPlayerArea()*4+3]);
 	}
 }
 
