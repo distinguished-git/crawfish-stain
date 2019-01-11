@@ -212,14 +212,14 @@ void AutoTele::OnKey(bool up, BYTE key, LPARAM lParam, bool* block) {
 	{
 		UnitAny* Me = D2CLIENT_GetPlayerUnit();
 
-		if(Me->dwMode == PLAYER_MODE_STAND_INTOWN || Me->dwMode == PLAYER_MODE_WALK_INTOWN) {
+		if (Me->dwMode == PLAYER_MODE_STAND_INTOWN || Me->dwMode == PLAYER_MODE_WALK_INTOWN) {
 			POINT Vectorz[5];
-			if(GetPlayerArea() == MAP_A3_KURAST_DOCKS) {
+			if (GetPlayerArea() == MAP_A3_KURAST_DOCKS) {
 				Vectorz[1] = FindPresetLocation(UNIT_OBJECT, 237, GetPlayerArea());
 			}
 			RunTo(Vectorz[1].x, Vectorz[1].y);
 			CastOnMap(Vectorz[1].x, Vectorz[1].y, true);
-			return
+			return;
 		}
 		
 		ManageTele(vVector[GetPlayerArea()*4+2]);
