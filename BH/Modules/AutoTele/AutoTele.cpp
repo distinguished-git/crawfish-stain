@@ -2,6 +2,7 @@
 #include "../../BH.h"
 #include "ATIncludes\CMapIncludes.h"
 #include "ATIncludes\Vectors.h"
+#include "../../D2Helpers.h"
 
 #define VALIDPTR(x) ( (x) && (!IsBadReadPtr(x,sizeof(x))) )
 
