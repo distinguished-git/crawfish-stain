@@ -154,7 +154,7 @@ void AutoTele::OnLoop() {
 			}
 		}
 
-		if((GetTickCount() - _timer2) > 400) {
+		if((GetTickCount() - _timer2) > 300) {
 			if(Try >= 5) {
 				PrintText(1, "ÿc4AutoTele:ÿc1 Failed to teleport after 5 tries");
 				TPath.RemoveAll();
@@ -214,8 +214,6 @@ void AutoTele::OnKey(bool up, BYTE key, LPARAM lParam, bool* block) {
 
 		if (Me->dwMode == PLAYER_MODE_STAND_INTOWN || Me->dwMode == PLAYER_MODE_WALK_INTOWN) {
 			POINT Vectorz[5];
-			Vectorz[1] = FindPresetLocation(UNIT_MONSTER, 255 , GetPlayerArea());
-			RunTo(Vectorz[1].x, Vectorz[1].y);
 			Vectorz[1] = FindPresetLocation(UNIT_OBJECT, 237, GetPlayerArea());
 			RunTo(Vectorz[1].x, Vectorz[1].y);
 			CastOnMap(Vectorz[1].x, Vectorz[1].y, true);
