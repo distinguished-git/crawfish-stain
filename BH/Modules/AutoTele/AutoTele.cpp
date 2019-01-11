@@ -221,7 +221,6 @@ void AutoTele::OnKey(bool up, BYTE key, LPARAM lParam, bool* block) {
 			CastOnMap(Vectorz[1].x, Vectorz[1].y, true);
 			return;
 		}
-		
 		ManageTele(vVector[GetPlayerArea()*4+2]);
 	}
 	else if (key == PrevKey) 
