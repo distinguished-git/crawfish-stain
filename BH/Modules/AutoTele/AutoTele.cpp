@@ -226,7 +226,7 @@ void AutoTele::OnGamePacketRecv(BYTE* packet, bool* block) {
 			UnitAny* Me = D2CLIENT_GetPlayerUnit();
 
 			if(Me->dwMode == PLAYER_MODE_DEATH || Me->dwMode == PLAYER_MODE_STAND_OUTTOWN ||
-		`		Me->dwMode == PLAYER_MODE_WALK_OUTTOWN || Me->dwMode == PLAYER_MODE_RUN || 
+				Me->dwMode == PLAYER_MODE_WALK_OUTTOWN || Me->dwMode == PLAYER_MODE_RUN || 
 				Me->dwMode == PLAYER_MODE_STAND_INTOWN || Me->dwMode == PLAYER_MODE_WALK_INTOWN ||
 				Me->dwMode == PLAYER_MODE_DEAD || Me->dwMode == PLAYER_MODE_SEQUENCE ||
 				Me->dwMode == PLAYER_MODE_BEING_KNOCKBACK)
