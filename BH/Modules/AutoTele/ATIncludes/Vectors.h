@@ -125,7 +125,7 @@ Vector vVector[] = {
 	{EXIT, MAP_A1_TOWER_CELLAR_LEVEL_3},
 
 
-  	{UNIT_OBJECT, 371},										//0x19; HOCINE - countess chest
+	{UNIT_MONSTER, 47},									//0x19; HOCINE - countess chest
     {0},
 	{0},
 	{EXIT, MAP_A1_TOWER_CELLAR_LEVEL_4},
