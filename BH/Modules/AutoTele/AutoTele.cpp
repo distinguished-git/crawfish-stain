@@ -223,18 +223,16 @@ void AutoTele::OnGamePacketRecv(BYTE* packet, bool* block) {
 		if(*(DWORD*)&packet[2] == D2CLIENT_GetPlayerUnit()->dwUnitId) {
 			packet[10] = 0;  
 
-			//if(Toggles["Fast Teleport"].state) {
-			//	UnitAny* Me = D2CLIENT_GetPlayerUnit();
+			UnitAny* Me = D2CLIENT_GetPlayerUnit();
 
-			//	if(Me->dwMode == PLAYER_MODE_DEATH || Me->dwMode == PLAYER_MODE_STAND_OUTTOWN ||
-			//`		Me->dwMode == PLAYER_MODE_WALK_OUTTOWN || Me->dwMode == PLAYER_MODE_RUN || 
-			//		Me->dwMode == PLAYER_MODE_STAND_INTOWN || Me->dwMode == PLAYER_MODE_WALK_INTOWN ||
-			//		Me->dwMode == PLAYER_MODE_DEAD || Me->dwMode == PLAYER_MODE_SEQUENCE ||
-			//		Me->dwMode == PLAYER_MODE_BEING_KNOCKBACK)
-			//		return;
+			if(Me->dwMode == PLAYER_MODE_DEATH || Me->dwMode == PLAYER_MODE_STAND_OUTTOWN ||
+		`		Me->dwMode == PLAYER_MODE_WALK_OUTTOWN || Me->dwMode == PLAYER_MODE_RUN || 
+				Me->dwMode == PLAYER_MODE_STAND_INTOWN || Me->dwMode == PLAYER_MODE_WALK_INTOWN ||
+				Me->dwMode == PLAYER_MODE_DEAD || Me->dwMode == PLAYER_MODE_SEQUENCE ||
+				Me->dwMode == PLAYER_MODE_BEING_KNOCKBACK)
+				return;
 
-			//	Me->dwFrameRemain = 0;
-			//}
+			Me->dwFrameRemain = 0;
 		}
 	}
 	return;
