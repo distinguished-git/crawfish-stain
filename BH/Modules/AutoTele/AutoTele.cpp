@@ -212,7 +212,7 @@ void AutoTele::OnKey(bool up, BYTE key, LPARAM lParam, bool* block) {
 	{
 		POINT Vectorz[5];
 		Vectorz[1] = FindPresetLocation(UNIT_OBJECT, 237, GetPlayerArea());
-		RunTo(Vectorz[1].x);
+		RunTo(Vectorz[1].x, Vectorz[1].y);
 //		ManageTele(vVector[GetPlayerArea()*4+2]);
 	}
 	else if (key == PrevKey) 
