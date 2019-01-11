@@ -411,7 +411,7 @@ Vector vVector[] = {
 
 
 	{EXIT, MAP_A3_KURAST_BAZAAR},							//0x4f
-	{UNIT_OBJECT, 397},										// sparkly chest
+	{UNIT_OBJECT, 435},										// sparkly chest
 	{UNIT_OBJECT, 237},
 	{EXIT, MAP_A3_FLAYER_JUNGLE},
 

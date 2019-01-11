@@ -154,7 +154,7 @@ void AutoTele::OnLoop() {
 			}
 		}
 
-		if((GetTickCount() - _timer2) > 500) {
+		if((GetTickCount() - _timer2) > 200) {
 			if(Try >= 5) {
 				PrintText(1, "ÿc4AutoTele:ÿc1 Failed to teleport after 5 tries");
 				TPath.RemoveAll();
@@ -190,7 +190,7 @@ void AutoTele::OnLoop() {
 		TeleActive = 0;
 		Try = 0;
 	}
-	if(DoInteract && SetInteract && _InteractTimer && (GetTickCount() - _InteractTimer > 150)) {
+	if(DoInteract && SetInteract && _InteractTimer && (GetTickCount() - _InteractTimer > 80)) {
 		Interact(InteractId, InteractType);
 		SetInteract = 0;
 		_InteractTimer = 0;
@@ -210,10 +210,19 @@ void AutoTele::OnKey(bool up, BYTE key, LPARAM lParam, bool* block) {
 	} 
 	else if (key == WPKey) 
 	{
-		POINT Vectorz[5];
-		Vectorz[1] = FindPresetLocation(UNIT_OBJECT, 237, GetPlayerArea());
-		RunTo(Vectorz[1].x, Vectorz[1].y);
-//		ManageTele(vVector[GetPlayerArea()*4+2]);
+		UnitAny* Me = D2CLIENT_GetPlayerUnit();
+
+		if(Me->dwMode == PLAYER_MODE_STAND_INTOWN || Me->dwMode == PLAYER_MODE_WALK_INTOWN) {
+			POINT Vectorz[5];
+			if(GetPlayerArea() == MAP_A3_KURAST_DOCKS) {
+				Vectorz[1] = FindPresetLocation(UNIT_OBJECT, 237, GetPlayerArea());
+			}
+			RunTo(Vectorz[1].x, Vectorz[1].y);
+			CastOnMap(Vectorz[1].x, Vectorz[1].y, true);
+			return
+		}
+		
+		ManageTele(vVector[GetPlayerArea()*4+2]);
 	}
 	else if (key == PrevKey) 
 	{
