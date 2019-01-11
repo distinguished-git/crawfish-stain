@@ -52,7 +52,7 @@ private:
 // Abin (abinn32@yahoo.com)
 ///////////////////////////////////////////////////////////
 
-#define TP_RANGE		35		// Maximum teleport range
+#define TP_RANGE		55		// Maximum teleport range
 #define RANGE_INVALID	10000  // invalid range flag
 
 /////////////////////////////////////////////////////////////////////
