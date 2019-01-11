@@ -101,7 +101,8 @@ BOOL cInjector::InjectDLL(DWORD dwPid, wstring wDllName)
 					}
 
 					printf("WARNING: this maphack will only work with Diablo II client version 1.13C!\n");
-					printf("You appear to have a different client version.\n");
+					printf("You appear to have a different client version. To learn how to downgrade your\n");
+					printf("client, see the Guides & Resources section of the slashdiablo subreddit.\n");
 					return false;
 				} else {
 					printf("VirtualAllocEx() failed with error code %d\n", GetLastError());

@@ -116,6 +116,10 @@ int main(int argc, const char* argv[]) {
 	EnumWindows(EnumWindowsProc, (LPARAM)&Windows);
 
 	//Print intro and the beginning of the menu.
+	printf("BH v0.1.7e By McGod\n");
+	printf("SlashDiablo Branch: Edited By Deadlock, underbent, and Slayergod13\n");
+	printf("Visit http://www.reddit.com/r/slashdiablo for updates!\n");
+
 	printf("\n");
 	printf("Command-line parameters:\n");
 	printf("\t-o <option number>: set injection option (0 for inject all, etc)\n");

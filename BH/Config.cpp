@@ -57,6 +57,7 @@ bool Config::Parse() {
 }
 
 bool Config::Write() {
+	//HOCINE - disable writing config file
 	return false;
 	
 	//If this is a config with a pre-set of values, can't parse!

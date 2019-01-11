@@ -47,13 +47,12 @@ void AutoTele::LoadConfig() {
 	BH::config->ReadToggle("Draw Path", "None", true, Toggles["Draw Path"]);
 	BH::config->ReadToggle("Draw Destination", "None", true, Toggles["Draw Destination"]);
 	BH::config->ReadToggle("Fast Teleport", "None", true, Toggles["Fast Teleport"]);
-	BH::config->ReadToggle("Quest Drop Warning", "None", true, Toggles["Quest Drop Warning"]);
+	BH::config->ReadToggle("Quest Drop Warning", "None", false, Toggles["Quest Drop Warning"]);
 
-	BH::config->ReadKey("Next Tele", "VK_J", NextKey);
-	BH::config->ReadKey("Other Tele", "VK_K", OtherKey);
-	BH::config->ReadKey("Waypoint Tele", "VK_L", WPKey);
-	BH::config->ReadKey("Prev Tele", "VK_SEMICOLON", PrevKey);
-
+	BH::config->ReadKey("Next Tele", "VK_NUMPAD0", NextKey);
+	BH::config->ReadKey("Other Tele", "VK_NUMPAD1", OtherKey);
+	BH::config->ReadKey("Waypoint Tele", "VK_NUMPAD2", WPKey);
+	BH::config->ReadKey("Prev Tele", "VK_NUMPAD3", PrevKey);
 	BH::config->ReadInt("Path Color", Colors[0]);
 	BH::config->ReadInt("Next Color", Colors[1]);
 	BH::config->ReadInt("Other Color", Colors[2]);
@@ -198,22 +197,17 @@ void AutoTele::OnLoop() {
 }
 
 void AutoTele::OnKey(bool up, BYTE key, LPARAM lParam, bool* block) {
-	GetVectors();
 	if (key == NextKey) 
 	{
-		ManageTele(vVector[GetPlayerArea()*4+0]);
-	}
+	} 
 	else if (key == OtherKey) 
 	{
-		ManageTele(vVector[GetPlayerArea()*4+1]);
 	} 
 	else if (key == WPKey) 
 	{
-		ManageTele(vVector[GetPlayerArea()*4+2]);
 	}
 	else if (key == PrevKey) 
 	{
-		ManageTele(vVector[GetPlayerArea()*4+3]);
 	}
 }
 
@@ -227,7 +221,7 @@ void AutoTele::OnGamePacketRecv(BYTE* packet, bool* block) {
 			//	UnitAny* Me = D2CLIENT_GetPlayerUnit();
 
 			//	if(Me->dwMode == PLAYER_MODE_DEATH || Me->dwMode == PLAYER_MODE_STAND_OUTTOWN ||
-			//`		Me->dwMode == PLAYER_MODE_WALK_OUTTOWN || Me->dwMode == PLAYER_MODE_RUN || 
+			//		Me->dwMode == PLAYER_MODE_WALK_OUTTOWN || Me->dwMode == PLAYER_MODE_RUN || 
 			//		Me->dwMode == PLAYER_MODE_STAND_INTOWN || Me->dwMode == PLAYER_MODE_WALK_INTOWN ||
 			//		Me->dwMode == PLAYER_MODE_DEAD || Me->dwMode == PLAYER_MODE_SEQUENCE ||
 			//		Me->dwMode == PLAYER_MODE_BEING_KNOCKBACK)
@@ -466,7 +460,7 @@ void AutoTele::PrintText(DWORD Color, char *szText, ...) {
 		vsprintf_s(szBuffer,152, szText, Args);
 		va_end(Args); 
 		wchar_t Buffer[0x130];
-		MultiByteToWideChar(0, 1, szBuffer, 152, Buffer, 304);
+		MultiByteToWideChar(CODE_PAGE, 1, szBuffer, 152, Buffer, 304);
 		D2CLIENT_PrintGameString(Buffer, Color);	
 	}
 }
