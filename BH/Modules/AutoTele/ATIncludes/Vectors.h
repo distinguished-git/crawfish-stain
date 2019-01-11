@@ -579,8 +579,8 @@ Vector vVector[] = {
 	{UNIT_OBJECT, 511},
 	{EXIT, MAP_A5_ARREAT_PLATEAU},
 
-  {0},																			//0x72
-	{UNIT_OBJECT, 460},
+  	{UNIT_OBJECT, 460},											//0x72 - HOCINE - made frozen anya the "next" location, not other
+	{0},
 	{0},
 	{EXIT, MAP_A5_CRYSTALLINE_PASSAGE},
 
