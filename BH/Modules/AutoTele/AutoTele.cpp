@@ -210,12 +210,14 @@ void AutoTele::OnKey(bool up, BYTE key, LPARAM lParam, bool* block) {
 	} 
 	else if (key == WPKey) 
 	{
-		RunTo(FindPresetLocation(UNIT_OBJECT, 237, Areas[0]));
+		Vectorz1[1] = FindPresetLocation(UNIT_OBJECT, 237, Areas[0])
+		RunTo(Vectorz1[1].x);
 //		ManageTele(vVector[GetPlayerArea()*4+2]);
 	}
 	else if (key == PrevKey) 
 	{
-		RunTo(FindPresetLocation(UNIT_OBJECT, 237, Areas[1]));
+		Vectorz1[1] = FindPresetLocation(UNIT_OBJECT, 237, Areas[1])
+		RunTo(Vectorz1[1].y);
 //		ManageTele(vVector[GetPlayerArea()*4+3]);
 	}
 }

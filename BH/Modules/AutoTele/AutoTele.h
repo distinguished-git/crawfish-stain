@@ -29,6 +29,7 @@ class AutoTele : public Module {
 		Room2* InteractRoom;
 		DWORD LastArea;
 		POINT Vectors[5];
+		POINT Vectorz[5];
 		CArrayEx <POINT, POINT> TPath;
 		HANDLE LoadHandle;
 
