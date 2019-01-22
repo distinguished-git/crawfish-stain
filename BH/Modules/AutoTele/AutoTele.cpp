@@ -210,15 +210,16 @@ void AutoTele::OnKey(bool up, BYTE key, LPARAM lParam, bool* block) {
 	}
 	else if (key == WPKey)
 	{
-		UnitAny* Me = D2CLIENT_GetPlayerUnit();
-
+/*
 		if (GetPlayerArea() == MAP_A3_KURAST_DOCKS) {
+			UnitAny* Me = D2CLIENT_GetPlayerUnit();
 			POINT Vectorz[5];
 			Vectorz[1] = FindPresetLocation(UNIT_OBJECT, 237, GetPlayerArea());
 			RunTo(Vectorz[1].x, Vectorz[1].y);
 			CastOnMap(Vectorz[1].x, Vectorz[1].y, true);
 			return;
 		}
+*/
 		ManageTele(vVector[GetPlayerArea()*4+2]);
 	}
 	else if (key == PrevKey) 
@@ -474,7 +475,7 @@ void AutoTele::PrintText(DWORD Color, char *szText, ...) {
 		vsprintf_s(szBuffer,152, szText, Args);
 		va_end(Args); 
 		wchar_t Buffer[0x130];
-		MultiByteToWideChar(0, 1, szBuffer, 152, Buffer, 304);
+		MultiByteToWideChar(CODE_PAGE, 1, szBuffer, 152, Buffer, 304);
 		D2CLIENT_PrintGameString(Buffer, Color);	
 	}
 }
